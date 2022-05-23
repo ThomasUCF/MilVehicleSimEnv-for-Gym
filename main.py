@@ -24,9 +24,11 @@ for episode in range(1, episodes + 1):
 
 
         # This is for Testing the Observation Space
+        '''
         with open('GFG.csv', 'w') as f:
             write = csv.writer(f)
             write.writerows(state)
+        '''
 
 
         score += reward

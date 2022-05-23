@@ -1,27 +1,7 @@
 '''
-Documentation:
-MAP CSV-File:
-    90  Forrest
-    91  Sand
-    92  Road
-    93  Water
-    Map is loaded as list and can be accessed with list_map[y][x]
-
-Scenar CSV-File:
-    10  Tank
-    99  Goal (Flag)
-    Scenar is loaded as list and can be accessed with list_map[y][x]
-
-Action Space:
-    1   Move up
-    2   Move Right
-    3   Move Down
-    4   Move Left
-    5   Do Nothing
-
-Observatgion Space:
-    Combination of Map List and Scenar List; uses module merge_obspace
-    Size: 64 x 64
+Author: Thomas Schiller
+University: University of Central Florida
+Institute: Institute for Simulation and Training
 '''
 
 import csv
@@ -35,6 +15,10 @@ import merge_obspace
 
 class ThesisSimEnv(Env):
     def __init__(self):
+        # set mode
+        self.drone_mode = False
+        self.speed_drone = 1
+
         # Set episode length
         self.timesteps = 60
         self.episode_length = self.timesteps
@@ -97,12 +81,15 @@ class ThesisSimEnv(Env):
                     pass
 
         # checking on which terrain tank is and set according speed for this step
-        if self.list_map[self.y_coord][self.x_coord] == 92:
-            self.distance_move = self.speed_road
-        elif self.list_map[self.y_coord][self.x_coord] == 91:
-            self.distance_move = self.speed_sand
-        elif self.list_map[self.y_coord][self.x_coord] == 90:
-            self.distance_move = self.speed_forrest
+        if self.drone_mode:
+            self.distance_move = self.speed_drone
+        else:
+            if self.list_map[self.y_coord][self.x_coord] == 92:
+                self.distance_move = self.speed_road
+            elif self.list_map[self.y_coord][self.x_coord] == 91:
+                self.distance_move = self.speed_sand
+            elif self.list_map[self.y_coord][self.x_coord] == 90:
+                self.distance_move = self.speed_forrest
 
         # actual movement ...
         # move upwards
