@@ -12,7 +12,7 @@ env = TankSim.ThesisSimEnv()
 
 episodes_scores = []
 episodes = 10
-for episode in range(1, episodes + 1):
+for episode in range(episodes):
     state = env.reset()
     done = False
     score = 0
