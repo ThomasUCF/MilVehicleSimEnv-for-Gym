@@ -1,9 +1,13 @@
+'''
+Author: Thomas Schiller
+University: University of Central Florida
+Institute: Institute for Simulation and Training
+'''
+
+
 import time
-
 import csv
-
 from colorama import Fore, Back
-
 import TankSimEnv as TankSim
 
 env = TankSim.ThesisSimEnv()

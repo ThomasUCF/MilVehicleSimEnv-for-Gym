@@ -1,4 +1,6 @@
 # GymTankSimEnv
+Latest edit: 05/31/2022
+
 **MAP CSV-File:**<br>
     90  Forrest<br>
     91  Sand<br>
@@ -30,3 +32,12 @@
     The csv-file as the format:<br>
     First Row: x,y<br>
     Following Rows: x-coordinate-step, y-coordinate-step<br>
+    
+**ShowMap Tool**<br>
+	This tool is to shows a graphical map from a csv file.<br>
+   The following commands are available:
+    
+	MapViewer showmap --filename  --> Show Map in Windows
+	MapViewer savemap --filename  --> Saves Map as PNG-File
+
+Standard --filename is "maps/Map01_TankSimEnv.csv".

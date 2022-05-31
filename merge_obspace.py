@@ -1,3 +1,10 @@
+'''
+Author: Thomas Schiller
+University: University of Central Florida
+Institute: Institute for Simulation and Training
+'''
+
+
 def get_obspace(observation_space, list_map, list_scenar, map_length):
     for y in range(map_length):
         for x in range(map_length):
