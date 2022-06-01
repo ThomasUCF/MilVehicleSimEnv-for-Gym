@@ -6,6 +6,7 @@
 
 ## Introduction
 This is a custom gym environment simulating a tank or drone movement on a custom map of 64x64 size.<br>
+The goal for the tank or drone is to capture the flag.<br>
 The simulation is a single agent based. At the moment it can only handle one entity.
 
 ![](img/gymtankenv_screenshot.png)
@@ -22,7 +23,9 @@ Each grid on the map is defined by the following code:
 |92     |Road       |
 |93     |Water      |
 
-Map is loaded as list and can be accessed with `list_map[y][x]`
+Map is loaded as list and can be accessed with `list_map[y][x]` in the TankSimEnv.py
+
+![](img/excel_tool_map.png)
 
 ### ShowMap Tool
 This tool is to show a graphical map from a map csv file. It has a command line interface (CLI) and can be used in terminal or command line.<br>
@@ -47,8 +50,11 @@ Each grid of the scenar is defined by the following code:
 |-------|-----------|
 |10     |Tank/Drone |
 |99     |Goal/Flag  |
+|0      |Nothing    |
 
-Scenar is loaded as list and can be accessed with `list_map[y][x]`
+Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSimEnv.py
+
+![](img/excel_tool_scenar.png)
     
 ## Action Space
 
