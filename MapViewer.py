@@ -2,6 +2,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import click
 import time
+from PIL import Image
+
 
 def show_map(filename, save_map):
     # set image file
@@ -34,7 +36,7 @@ def show_map(filename, save_map):
 
     plt.clf()
     plt.imshow(rgb_image, interpolation='nearest')
-    plt.title("Analysis of Formation")
+    plt.title("Map")
 
     if save_map == 1:
         tc = time.time()

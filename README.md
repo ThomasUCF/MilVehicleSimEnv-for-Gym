@@ -64,6 +64,12 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]`
 Combination of Map List and Scenar List; uses module merge_obspace<br>
 Size: 64 x 64
 
+## Reward
+Worst Possible Reward: -61
+Best Theoretical Reward: 0
+
+Reward is similar to Mountain Car. The higher the value, the better the result.
+
 ## Drone Mode:
 A drone mode can be activated. This means, that the speed is always the same no matter what terrain.
 
@@ -79,10 +85,19 @@ If Path tracking is true, each episode will write the path of the tank/drone to 
 
 The csv-file as the format:
 
-|x    |y         |
+|x                    |y                    |
 |---------------------|---------------------|
-|x-coordinate 1. step |x-coordinate 1. step |
-|x-coordinate 2. step |x-coordinate 2. step |
-|x-coordinate n. step |x-coordinate n. step |
+|x-coordinate 1. step |y-coordinate 1. step |
+|x-coordinate 2. step |y-coordinate 2. step |
+|x-coordinate n. step |y-coordinate n. step |
     
     
+### Path Tracking Tool: Single Path
+Map, Scenar and Path can be set at the beginning of the file:
+
+	map_file = 'maps/Map01_TankSimEnv.csv'
+	scenar_file = 'scenars/Scenar01_TankSimEnv.csv'
+	path_file = 'path_tracking/Path_1654107091.868553.csv'
+	
+The tool will print the path from the path file:
+![](img/single_path_track_plot.png)

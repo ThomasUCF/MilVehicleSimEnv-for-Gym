@@ -23,7 +23,7 @@ class ThesisSimEnv(Env):
             self.path_track_y = []
 
         # set Drone Mode
-        self.drone_mode = True
+        self.drone_mode = False
         self.speed_drone = 1
 
         # Set episode length
@@ -40,7 +40,7 @@ class ThesisSimEnv(Env):
 
         # set Map and Scenar File!
         map_file = "maps/Map01_TankSimEnv.csv"
-        self.scenar_file = "scenars/Scenar02_TankSimEnv.csv"
+        self.scenar_file = "scenars/Scenar01_TankSimEnv.csv"
 
         # load map file
         with open(map_file, newline='') as csvfile_map:
