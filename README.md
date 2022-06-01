@@ -93,7 +93,8 @@ The csv-file as the format:
     
     
 ### Path Tracking Tool: Single Path
-Map, Scenar and Path can be set at the beginning of the file:
+This tool displays a tracked path with the map and scenar.<br>
+Map, scenar and path must be set at the beginning of the file:
 
 	map_file = 'maps/Map01_TankSimEnv.csv'
 	scenar_file = 'scenars/Scenar01_TankSimEnv.csv'
@@ -101,3 +102,6 @@ Map, Scenar and Path can be set at the beginning of the file:
 	
 The tool will print the path from the path file:
 ![](img/single_path_track_plot.png)
+
+### Path Tracking Tool: Multi Path
+tbd
