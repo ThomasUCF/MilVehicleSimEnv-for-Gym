@@ -60,7 +60,7 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]`
 |4     |Move Left  |
 |4     |Do Nothing |
     
-## Observatgion Space
+## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>
 Size: 64 x 64
 
@@ -92,7 +92,7 @@ The csv-file as the format:
 |x-coordinate n. step |y-coordinate n. step |
     
     
-### Path Tracking Tool: Single Path
+### Path Viewer Tool: Single Path
 This tool displays a tracked path with the map and scenar.<br>
 Map, scenar and path must be set at the beginning of the file:
 
@@ -103,5 +103,5 @@ Map, scenar and path must be set at the beginning of the file:
 The tool will print the path from the path file:
 ![](img/single_path_track_plot.png)
 
-### Path Tracking Tool: Multi Path
+### Path Viewer Tool: Multi Path
 tbd
