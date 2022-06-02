@@ -3,6 +3,7 @@
 **Author:** Thomas Schiller<br>
 **University:** University of Central Florida (UCF)<br>
 **Institute:** Institute for Simulation and Training<br>
+Test
 
 ## Introduction
 This is a custom gym environment simulating a tank or drone movement on a custom map of 64x64 size.<br>
