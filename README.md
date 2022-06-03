@@ -1,5 +1,5 @@
-# GymTankSimEnv
-**Latest edit:** 06/01/2022<br>
+# MilVehicleSimEnv for Gym
+**Latest edit:** 06/03/2022<br>
 **Author:** Thomas Schiller<br>
 **University:** University of Central Florida (UCF)<br>
 **Institute:** Institute for Simulation and Training<br>
