@@ -15,4 +15,4 @@ Handbook of MilVehicleSimEnv can be downloaded here:
 
 ## Future Feature List
 Status on planned features is listed here:
-[MilVehicleSimEnv Handbook](Documentation/Future_Feature_Brainstorming.md)
+[Future Features Ideas](Documentation/Future_Feature_Brainstorming.md)
