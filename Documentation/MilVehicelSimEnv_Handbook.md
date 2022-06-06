@@ -5,10 +5,8 @@
 **Institute:** Institute for Simulation and Training<br>
 
 ## Introduction
-This is a custom gym environment simulating a tank or drone movement on a custom map of 64x64 size.<br>
-The goal for the tank or drone is to capture the flag.<br>
-The simulation is a single agent based. At the moment it can only handle one entity.
-
+This is a custom single-agent gym environment simulating a tank or drone movement on a custom map of 64x64 size.<br>
+The goal of the tank or drone is to capture the flag.
 ![](img/gymtankenv_screenshot.png)
 
 ## Map Files and Handling
