@@ -1,4 +1,4 @@
-# MilVehicleSimEnv for Gym
+# MilVehicleSimEnv for Gym Handbook
 **Latest edit:** 06/06/2022<br>
 **Author:** Thomas Schiller<br>
 **University:** University of Central Florida (UCF)<br>
@@ -59,14 +59,16 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSi
 |Action|Movement        |
 |------|----------------|
 |1     |Move NORTH      |
-|1     |Move NORTH-EAST |
-|1     |Move EAST       |
-|1     |Move SOUTH-EAST |
-|1     |Move SOUTH      |
-|1     |Move SOUTH-WEST |
-|1     |Move WEST       |
-|1     |Move NORTH-WEST |
-|1     |Do nothing      |
+|2     |Move NORTH-EAST |
+|3     |Move EAST       |
+|4     |Move SOUTH-EAST |
+|5     |Move SOUTH      |
+|6     |Move SOUTH-WEST |
+|7     |Move WEST       |
+|8     |Move NORTH-WEST |
+|9     |Do nothing      |
+
+<img src="img/Action_Space.png" alt="drawing" width="300"/>
     
 ## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>
