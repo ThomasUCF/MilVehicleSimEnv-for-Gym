@@ -1,5 +1,4 @@
 # MilVehicleSimEnv for Gym
-**Latest edit:** 06/06/2022<br>
 **Author:** Thomas Schiller<br>
 **University:** University of Central Florida (UCF)<br>
 **Institute:** Institute for Simulation and Training<br>
@@ -8,7 +7,7 @@
 This is a custom single-agent gym environment simulating a tank or drone movement on a custom map of 64x64 size.<br>
 The goal of the tank or drone is to capture the flag.
 
-![](Documentation/img/gymtankenv_screenshot.png)
+<img src="Documentation/img/gymtankenv_screenshot.png" alt="drawing" width="600"/>
 
 ## Handbook
 Please refer the handbook as the manual to this environment:
