@@ -14,7 +14,7 @@
 * limited health
 
 ## entity movement
-* diagonal movement
+* DONE diagonal movement
 * more detailed speed on different terrain
 
 ## Randomised Entity and Goal scenar setting
@@ -23,3 +23,7 @@
 ## CLI for Path Viewer
 * make Path Viewer CLI based
 * e.G.: PathViewer --folder --all
+
+## Maps & Scenars
+* add maps and scenars
+* make an overview table of maps and scenars

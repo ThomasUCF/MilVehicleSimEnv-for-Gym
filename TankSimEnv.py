@@ -67,7 +67,7 @@ class ThesisSimEnv(Env):
                     pass
 
         # Set the Action Space
-        self.action_space = Discrete(5)
+        self.action_space = Discrete(9)
 
         # Set the Framework List for the Observation Space
         with open(map_file, newline='') as csvfile_observation_space:
@@ -104,28 +104,63 @@ class ThesisSimEnv(Env):
                 self.distance_move = self.speed_forrest
 
         # actual movement ...
-        # move upwards
+        # move NORTH
         if action == 1:
             if self.y_coord > self.distance_move:
                 self.list_scenar[self.y_coord - self.distance_move][self.x_coord] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
-        # move right
+
+        # move NORTH-EAST
         elif action == 2:
+            if (self.x_coord < self.map_length + self.distance_move) and (self.y_coord > self.distance_move):
+                self.list_scenar[self.y_coord - self.distance_move][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][
+                    self.x_coord]
+                self.list_scenar[self.y_coord][self.x_coord] = 0
+
+        # move EAST
+        elif action == 3:
             if self.x_coord < self.map_length + self.distance_move:
                 self.list_scenar[self.y_coord][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
-        # move down
-        elif action == 3:
+
+        # move SOUTH-EAST
+        elif action == 4:
+            if (self.y_coord < self.map_length + self.distance_move) and (self.x_coord < self.map_length + self.distance_move):
+                self.list_scenar[self.y_coord + self.distance_move][self.x_coord + self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
+                self.list_scenar[self.y_coord][self.x_coord] = 0
+
+        # move SOUTH
+        elif action == 5:
             if self.y_coord < self.map_length + self.distance_move:
                 self.list_scenar[self.y_coord + self.distance_move][self.x_coord] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
-        # move left
-        elif action == 4:
+
+        # move SOUTH-WEST
+        elif action == 6:
+            if (self.y_coord < self.map_length + self.distance_move) and (self.x_coord > self.distance_move):
+                self.list_scenar[self.y_coord + self.distance_move][self.x_coord - self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
+                self.list_scenar[self.y_coord][self.x_coord] = 0
+
+        # move WEST
+        elif action == 7:
             if self.x_coord > self.distance_move:
                 self.list_scenar[self.y_coord][self.x_coord - 1] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
+
+        # move NORTH-WEST
+        elif action == 8:
+            if (self.y_coord > self.distance_move) and (self.x_coord > self.distance_move):
+                self.list_scenar[self.y_coord - self.distance_move][self.x_coord - self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
+                self.list_scenar[self.y_coord][self.x_coord] = 0
+
         # do nothing
-        elif action == 5:
+        elif action == 9:
             pass
 
         # calculate the distance to the goal

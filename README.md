@@ -58,13 +58,17 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSi
     
 ## Action Space
 
-|Action|Movement   |
-|------|-----------|
-|1     |Move Up    |
-|2     |Move Right |
-|3     |Move Down  |
-|4     |Move Left  |
-|4     |Do Nothing |
+|Action|Movement        |
+|------|----------------|
+|1     |Move NORTH      |
+|1     |Move NORTH-EAST |
+|1     |Move EAST       |
+|1     |Move SOUTH-EAST |
+|1     |Move SOUTH      |
+|1     |Move SOUTH-WEST |
+|1     |Move WEST       |
+|1     |Move NORTH-WEST |
+|1     |Do nothing      |
     
 ## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>
