@@ -68,7 +68,7 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSi
 |8     |Move NORTH-WEST |
 |9     |Do nothing      |
 
-<img src="img/Action_Space.png" alt="drawing" width="300"/>
+<img src="img/Action_Space.png" alt="drawing" width="240"/>
     
 ## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>

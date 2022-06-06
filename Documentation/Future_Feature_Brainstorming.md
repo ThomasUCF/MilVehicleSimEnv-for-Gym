@@ -14,7 +14,7 @@
 * limited health
 
 ## entity movement
-* DONE diagonal movement
+* CHECK diagonal movement
 * more detailed speed on different terrain
 
 ## Randomised Entity and Goal scenar setting
