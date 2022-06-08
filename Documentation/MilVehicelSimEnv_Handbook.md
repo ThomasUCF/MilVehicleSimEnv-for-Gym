@@ -9,8 +9,15 @@ This is a custom single-agent gym environment simulating a tank or drone movemen
 The goal of the tank or drone is to capture the flag.
 ![](img/gymtankenv_screenshot.png)
 
-## Map Files and Handling
 
+## Map and Scenario Selection
+Maps and scenario files need to be set in the init-function:
+
+	# set Map and Scenar File!
+	map_file = "maps/Map01_TankSimEnv.csv"
+	self.scenar_file = "scenars/Scenar05_TankSimEnv.csv"
+
+## Map Files
 Maps can be created with an Excel tool and are stored in a csv file. The tool and csv map files are stored in the "maps" folder.<br>
 Each grid on the map is defined by the following code:
 
@@ -39,7 +46,7 @@ Use the help command for how to use this tool:
 
 Standard --filename is "maps/Map01_TankSimEnv.csv".
     
-## Scenar Files and Handling
+## Scenario Files
 
 Scenars can be created with an Excel tool and are stored in a csv file. The tool and csv scenar files are stored in the "scenars" folder.<br>
 Each grid of the scenar is defined by the following code:
@@ -81,14 +88,31 @@ Best Theoretical Reward: 0
 Reward is similar to Mountain Car. The higher the value, the better the result.
 
 ## Drone Mode:
-A drone mode can be activated. This means, that the speed is always the same no matter what terrain.
+A drone mode can be activated. This means, that the speed is always the same no matter what terrain.<br>
+Drone mode activation and speed can be set in the init-function:
 
 	# set Drone Mode
 	self.drone_mode = True
 	self.speed_drone = 1
+	
+## IED Mode
+An IED can be set wherever wanted in the scenario files. The code for an IED in the csv-file is `80`. Similar to the goal, every step is checked if the tank/drone is at a certain distance to the IED. When the distance is <= 2, the IED gets activated.
+
+Rendering for the IED can be activated and deactivated in the init-function:
+
+    # show IEDs to user in rendering
+    self.show_ied = False
+    
+Although the IED can be rendered it never appears in the observation space for obvious reasons.
+If the IED is activated, the episode is set to done and the worst possible reward is given.
+
+<img src="img/ied_mode.png" alt="drawing" width="240"/><br>
+The IED is rendered as a red "B".
+
 
 ## Path Tracking
 If Path tracking is true, each episode will write the path of the tank/drone to a csv-file<br>
+Path tracking can be activated in the init-function:
 
     # set Path Tracking
     self.path_tracking = True

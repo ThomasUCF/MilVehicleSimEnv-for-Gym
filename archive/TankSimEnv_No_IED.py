@@ -3,7 +3,7 @@ Author: Thomas Schiller
 University: University of Central Florida
 Institute: Institute for Simulation and Training
 
-This Version has IED function included!
+This Version has no IED function included!
 '''
 
 import csv
@@ -41,17 +41,8 @@ class ThesisSimEnv(Env):
         self.speed_forrest = 1
 
         # set Map and Scenar File!
-        map_file = "maps/Map01_TankSimEnv.csv"
-        self.scenar_file = "scenars/Scenar05_TankSimEnv.csv"
-
-        # show IEDs to user in rendering
-        self.show_ied = True
-
-        # set Boolean for IED activation
-        self.ied_attack = False
-
-        #set Boolean for Goal Reached
-        self.goal_reached = False
+        map_file = "../maps/Map01_TankSimEnv.csv"
+        self.scenar_file = "../scenars/Scenar01_TankSimEnv.csv"
 
         # load map file
         with open(map_file, newline='') as csvfile_map:
@@ -75,14 +66,6 @@ class ThesisSimEnv(Env):
                 if self.list_scenar[y][x] == 99:
                     self.y_coord_goal = y
                     self.x_coord_goal = x
-                    pass
-
-        # grab the coordinates for the IED
-        for y in range(self.map_length):
-            for x in range(self.map_length):
-                if self.list_scenar[y][x] == 80:
-                    self.y_coord_ied = y
-                    self.x_coord_ied = x
                     pass
 
         # Set the Action Space
@@ -126,59 +109,56 @@ class ThesisSimEnv(Env):
         # move NORTH
         if action == 1:
             if self.y_coord > self.distance_move:
-                # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord - self.distance_move][self.x_coord] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
-
-
 
         # move NORTH-EAST
         elif action == 2:
             if (self.x_coord < self.map_length + self.distance_move) and (self.y_coord > self.distance_move):
-                # this is the actual move; it writes the new coordinate in the scenar list
-                self.list_scenar[self.y_coord - self.distance_move][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
+                self.list_scenar[self.y_coord - self.distance_move][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][
+                    self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move EAST
         elif action == 3:
             if self.x_coord < self.map_length + self.distance_move:
-                # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move SOUTH-EAST
         elif action == 4:
             if (self.y_coord < self.map_length + self.distance_move) and (self.x_coord < self.map_length + self.distance_move):
-                # this is the actual move; it writes the new coordinate in the scenar list
-                self.list_scenar[self.y_coord + self.distance_move][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
+                self.list_scenar[self.y_coord + self.distance_move][self.x_coord + self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move SOUTH
         elif action == 5:
             if self.y_coord < self.map_length + self.distance_move:
-                # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord + self.distance_move][self.x_coord] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move SOUTH-WEST
         elif action == 6:
             if (self.y_coord < self.map_length + self.distance_move) and (self.x_coord > self.distance_move):
-                # this is the actual move; it writes the new coordinate in the scenar list
-                self.list_scenar[self.y_coord + self.distance_move][self.x_coord - self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
+                self.list_scenar[self.y_coord + self.distance_move][self.x_coord - self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move WEST
         elif action == 7:
             if self.x_coord > self.distance_move:
-                # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord][self.x_coord - 1] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # move NORTH-WEST
         elif action == 8:
             if (self.y_coord > self.distance_move) and (self.x_coord > self.distance_move):
-                # this is the actual move; it writes the new coordinate in the scenar list
-                self.list_scenar[self.y_coord - self.distance_move][self.x_coord - self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
+                self.list_scenar[self.y_coord - self.distance_move][self.x_coord - self.distance_move] = \
+                self.list_scenar[self.y_coord][
+                    self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
 
         # do nothing
@@ -187,9 +167,6 @@ class ThesisSimEnv(Env):
 
         # calculate the distance to the goal
         self.distance_goal = math.sqrt((self.x_coord - self.x_coord_goal) ** 2 + (self.y_coord - self.y_coord_goal) ** 2)
-        # check if goal is reached
-        if self.distance_goal <= 2:
-            self.goal_reached = True
 
         # setting the reward here
         if self.distance_goal > 1:
@@ -197,22 +174,9 @@ class ThesisSimEnv(Env):
         else:
             reward = 0
 
-        # calculate the distance to IED
-        self.distance_ied = math.sqrt((self.x_coord - self.x_coord_ied) ** 2 + (self.y_coord - self.y_coord_ied) ** 2)
-        # check if distance to IED is requirement of IED activation
-        if self.distance_ied <= 2:
-            self.ied_attack = True
-
-        # check if Goal (Flag) is captured, episode is ended or IED is hit
-        if (self.episode_length <= 0) or (self.distance_goal < 2) or (self.ied_attack == True):
+        # check if Goal (Flag) is captured
+        if (self.episode_length <= 0) or (self.distance_goal < 2):
             done = True
-
-            if self.ied_attack:
-                reward = -self.episode_length - 1
-                #print("IED!")  # for debugging purpose
-                #print("Reward: ", reward)  # for debugging purpose
-                #print("Episode Length: ", self.episode_length)  # for debugging purpose
-
             # write path tracking lists to csv file with timestamp, when path tracking is True
             # check if episode is done or episode length has ended
             if self.path_tracking:
@@ -258,26 +222,23 @@ class ThesisSimEnv(Env):
         os.system('clear')
 
         # get observation_space
-        self.observation_space_render = merge_obspace.get_obspace_render(self.observation_space, self.list_map, self.list_scenar, self.map_length, self.show_ied)
+        self.observation_space = merge_obspace.get_obspace(self.observation_space, self.list_map, self.list_scenar, self.map_length)
 
         # render map in terminal
         for y in range(self.map_length):
             for x in range(self.map_length):
-                if self.observation_space_render[y][x] == 90:
+                if self.observation_space[y][x] == 90:
                     print(Back.GREEN + '  ', end=" " + Back.BLACK)
-                elif self.observation_space_render[y][x] == 92:
+                elif self.observation_space[y][x] == 92:
                     print(Back.WHITE + '  ', end=" " + Back.BLACK)
-                elif self.observation_space_render[y][x] == 91:
+                elif self.observation_space[y][x] == 91:
                     print(Back.YELLOW + '  ', end=" " + Back.BLACK)
-                elif self.observation_space_render[y][x] == 93:
+                elif self.observation_space[y][x] == 93:
                     print(Back.BLUE + '  ', end=" " + Back.BLACK)
-                elif self.observation_space_render[y][x] == 99:
-                    print(Back.MAGENTA + ' G', end=" " + Back.BLACK)
-                elif self.observation_space_render[y][x] == 10:
+                elif self.observation_space[y][x] == 99:
+                    print(Back.RED + ' G', end=" " + Back.BLACK)
+                elif self.observation_space[y][x] == 10:
                     print(Back.CYAN + ' T', end=" " + Back.BLACK)
-                elif self.show_ied:
-                    if self.observation_space_render[y][x] == 80:
-                        print(Back.RED + ' B', end=" " + Back.BLACK)
             print("")
 
         print(f"Distance to goal: {round(self.distance_goal, 2)}\n")
@@ -291,13 +252,6 @@ class ThesisSimEnv(Env):
 
         self.episode_length = self.timesteps
 
-        # reset IED activation
-        self.ied_attack = False
-
-        # reset goal reached
-        self.goal_reached = False
-
-        # reset episode DONE
         done = False
 
         # Reset Scenar List
