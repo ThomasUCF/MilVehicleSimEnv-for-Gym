@@ -4,7 +4,7 @@
 * grab all the files in the folder and put them on a graph for track viewing
 
 ## Enemy Elements
-* IEDs
+* CHECK IEDs
 * Enemy Tanks
   * Create an area in the scenar. An enemy will be set there randomly each episode.
 * borders/no-go areas

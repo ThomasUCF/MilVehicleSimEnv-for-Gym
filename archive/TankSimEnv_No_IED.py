@@ -16,7 +16,7 @@ from colorama import Fore, Back, Style
 import merge_obspace
 
 
-class ThesisSimEnv(Env):
+class MilVehicleSimEnv(Env):
     def __init__(self):
         # set Path Tracking
         self.path_tracking = True

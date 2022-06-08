@@ -8,9 +8,9 @@ Institute: Institute for Simulation and Training
 import time
 import csv
 from colorama import Fore, Back
-import TankSimEnv as TankSim
+import MilVehicleSimEnv as MilSim
 
-env = TankSim.ThesisSimEnv()
+env = MilSim.MilVehicleSimEnv()
 
 #env.observation_space.sample()
 
