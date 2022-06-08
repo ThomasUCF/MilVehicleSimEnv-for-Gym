@@ -19,7 +19,7 @@ import merge_obspace
 class MilVehicleSimEnv(Env):
     def __init__(self):
         # set Path Tracking
-        self.path_tracking = True
+        self.path_tracking = False
         if self.path_tracking:
             self.path_track_x = []
             self.path_track_y = []
@@ -44,8 +44,10 @@ class MilVehicleSimEnv(Env):
         map_file = "maps/Map01_TankSimEnv.csv"
         self.scenar_file = "scenars/Scenar05_TankSimEnv.csv"
 
+        # set IED Mode
+        self.ied_mode = True
         # show IEDs to user in rendering
-        self.show_ied = True
+        self.show_ied = False
 
         # set Boolean for IED activation
         self.ied_attack = False
@@ -78,12 +80,13 @@ class MilVehicleSimEnv(Env):
                     pass
 
         # grab the coordinates for the IED
-        for y in range(self.map_length):
-            for x in range(self.map_length):
-                if self.list_scenar[y][x] == 80:
-                    self.y_coord_ied = y
-                    self.x_coord_ied = x
-                    pass
+        if self.ied_mode:
+            for y in range(self.map_length):
+                for x in range(self.map_length):
+                    if self.list_scenar[y][x] == 80:
+                        self.y_coord_ied = y
+                        self.x_coord_ied = x
+                        pass
 
         # Set the Action Space
         self.action_space = Discrete(9)
@@ -198,10 +201,11 @@ class MilVehicleSimEnv(Env):
             reward = 0
 
         # calculate the distance to IED
-        self.distance_ied = math.sqrt((self.x_coord - self.x_coord_ied) ** 2 + (self.y_coord - self.y_coord_ied) ** 2)
-        # check if distance to IED is requirement of IED activation
-        if self.distance_ied <= 2:
-            self.ied_attack = True
+        if self.ied_mode:
+            self.distance_ied = math.sqrt((self.x_coord - self.x_coord_ied) ** 2 + (self.y_coord - self.y_coord_ied) ** 2)
+            # check if distance to IED is requirement of IED activation
+            if self.distance_ied <= 2:
+                self.ied_attack = True
 
         # check if Goal (Flag) is captured, episode is ended or IED is hit
         if (self.episode_length <= 0) or (self.distance_goal < 2) or (self.ied_attack == True):
@@ -258,7 +262,7 @@ class MilVehicleSimEnv(Env):
         os.system('clear')
 
         # get observation_space
-        self.observation_space_render = merge_obspace.get_obspace_render(self.observation_space, self.list_map, self.list_scenar, self.map_length, self.show_ied)
+        self.observation_space_render = merge_obspace.get_obspace_render(self.observation_space, self.list_map, self.list_scenar, self.map_length, self.ied_mode, self.show_ied)
 
         # render map in terminal
         for y in range(self.map_length):
@@ -275,12 +279,14 @@ class MilVehicleSimEnv(Env):
                     print(Back.MAGENTA + ' G', end=" " + Back.BLACK)
                 elif self.observation_space_render[y][x] == 10:
                     print(Back.CYAN + ' T', end=" " + Back.BLACK)
-                elif self.show_ied:
-                    if self.observation_space_render[y][x] == 80:
-                        print(Back.RED + ' B', end=" " + Back.BLACK)
+                elif self.ied_mode:
+                    if self.show_ied:
+                        if self.observation_space_render[y][x] == 80:
+                            print(Back.RED + ' B', end=" " + Back.BLACK)
             print("")
 
-        print(f"Distance to goal: {round(self.distance_goal, 2)}\n")
+        if self.episode_length <= 59:
+            print(f"Distance to goal: {round(self.distance_goal, 2)}\n")
 
 
 

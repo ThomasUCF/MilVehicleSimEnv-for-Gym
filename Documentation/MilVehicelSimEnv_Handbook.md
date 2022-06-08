@@ -80,6 +80,12 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSi
 ## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>
 Size: 64 x 64
+The observation space includes:
+
+* the terrain
+* the entity (tank/drone)
+* the goal
+* NOT the IED
 
 ## Reward
 Worst Possible Reward: -61
@@ -96,6 +102,11 @@ Drone mode activation and speed can be set in the init-function:
 	self.speed_drone = 1
 	
 ## IED Mode
+IED mode can be activated in the init-function:
+
+	# set IED Mode
+	self.ied_mode = True
+
 An IED can be set wherever wanted in the scenario files. The code for an IED in the csv-file is `80`. Similar to the goal, every step is checked if the tank/drone is at a certain distance to the IED. When the distance is <= 2, the IED gets activated.
 
 Rendering for the IED can be activated and deactivated in the init-function:
@@ -108,6 +119,8 @@ If the IED is activated, the episode is set to done and the worst possible rewar
 
 <img src="img/ied_mode.png" alt="drawing" width="240"/><br>
 The IED is rendered as a red "B".
+
+A scenario with an IED included can also be used without IED mode activated. The IED will then not be taken in consideration in activation and rendering.
 
 
 ## Path Tracking
