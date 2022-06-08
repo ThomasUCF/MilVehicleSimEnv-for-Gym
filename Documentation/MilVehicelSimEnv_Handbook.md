@@ -1,5 +1,5 @@
 # MilVehicleSimEnv for Gym Handbook
-**Latest edit:** 06/06/2022<br>
+**Latest edit:** 06/08/2022<br>
 **Author:** Thomas Schiller<br>
 **University:** University of Central Florida (UCF)<br>
 **Institute:** Institute for Simulation and Training<br>
