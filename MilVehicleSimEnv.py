@@ -2,8 +2,6 @@
 Author: Thomas Schiller
 University: University of Central Florida
 Institute: Institute for Simulation and Training
-
-This Version has IED function included!
 '''
 
 import csv
@@ -14,23 +12,26 @@ from gym import Env
 from gym.spaces import Discrete, Box
 from colorama import Fore, Back, Style
 import merge_obspace
-
+import reduce_obspace
 
 class MilVehicleSimEnv(Env):
     def __init__(self):
         # set Path Tracking
-        self.path_tracking = False
+        self.path_tracking = True
         if self.path_tracking:
             self.path_track_x = []
             self.path_track_y = []
 
         # set Drone Mode
-        self.drone_mode = False
+        self.drone_mode = True
         self.speed_drone = 1
 
         # Set episode length
         self.timesteps = 60
         self.episode_length = self.timesteps
+
+        # set if observation space is reduced
+        self.reduced_obspace = True
 
         # set map size (needs to correlate with csv-file size!)
         self.map_length = 64
@@ -47,7 +48,7 @@ class MilVehicleSimEnv(Env):
         # set IED Mode
         self.ied_mode = True
         # show IEDs to user in rendering
-        self.show_ied = False
+        self.show_ied = True
 
         # set Boolean for IED activation
         self.ied_attack = False
@@ -247,13 +248,23 @@ class MilVehicleSimEnv(Env):
         # get observation_space
         self.observation_space = merge_obspace.get_obspace(self.observation_space, self.list_map, self.list_scenar, self.map_length)
 
+        # reduce observation space if needed
+        if self.reduced_obspace:
+            self.reduced_obspace_list = reduce_obspace.reduce_obspace(self.observation_space, self.map_length)
+            #print(self.reduced_obspace_list)
+
+
         # reduce episode length by 1 one at the end of the step
         self.episode_length -= 1
 
 
         info = {}
 
-        return self.observation_space, reward, done, info
+        if self.reduced_obspace:
+            return self.reduced_obspace_list, reward, done, info
+
+        if not self.reduced_obspace:
+            return self.observation_space, reward, done, info
 
 
 
@@ -317,4 +328,10 @@ class MilVehicleSimEnv(Env):
         # get observation_space
         self.observation_space = merge_obspace.get_obspace(self.observation_space, self.list_map, self.list_scenar, self.map_length)
 
-        return self.observation_space
+        if self.reduced_obspace:
+            self.reduced_obspace_list = reduce_obspace.reduce_obspace(self.observation_space, self.map_length)
+
+        if self.reduced_obspace:
+            return self.reduced_obspace_list
+        if not self.reduced_obspace:
+            return self.observation_space

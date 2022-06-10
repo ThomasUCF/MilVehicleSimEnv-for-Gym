@@ -79,7 +79,7 @@ Scenar is loaded as list and can be accessed with `list_map[y][x]` in the TankSi
     
 ## Observation Space
 Combination of Map List and Scenar List; uses module merge_obspace<br>
-Size: 64 x 64
+
 The observation space includes:
 
 * the terrain
@@ -87,13 +87,55 @@ The observation space includes:
 * the goal
 * NOT the IED
 
+### Full Observation Space
+Size: 64 x 64
+
+### Reduced Observation Space
+A reduced observation space can be activated. This simulated a limited view of the entity.
+
+The reduced observation space can be activated in the init-function:
+
+	# set if observation space is reduced
+	self.reduced_obspace = True
+
+
+The following observation spaces are possible:
+
+* 5 x 5
+* 7 x 7
+
+The size of the reduced observation space can be set in the `reduce_obspace.py`:
+
+	#reduced_obspace_size = 25  # 5 x 5
+	reduced_obspace_size = 49  # 7 x 7
+
+
+### Observation Space Viewer
+The `obspace_show.py` can be run in a separate terminal. This script grabs the observation space from the observation_space folder. It is needed to activate show_obspace in the `main.py` to use this:
+
+	show_obspace = True
+	
+The observation space viewer is especially useful with the reduced observation space.
+
+The reduced observation space needs to be set in the `obspace_show.py` according to the reduced observation space in the `reduce_obspace.py`:
+
+	# set the reduced observation space
+	reduced_obspace = True
+	#reduced_obspace_size = 25  # 5 x 5
+	reduced_obspace_size = 49  # 7 x 7
+
+<img src="img/Main_Win_for_Reduced_Obspace.png" alt="drawing" width="400"/>
+<img src="img/Obspace_Viewer.png" alt="drawing" width="300"/><br>
+Reduced observation space of 7 x 7 in the observation space viewer
+
+
 ## Reward
 Worst Possible Reward: -61
 Best Theoretical Reward: 0
 
-Reward is similar to Mountain Car. The higher the value, the better the result.
+The reward is similar to Mountain Car. The higher the value, the better the result.
 
-## Drone Mode:
+## Drone Mode
 A drone mode can be activated. This means, that the speed is always the same no matter what terrain.<br>
 Drone mode activation and speed can be set in the init-function:
 

@@ -10,6 +10,8 @@ import csv
 from colorama import Fore, Back
 import MilVehicleSimEnv as MilSim
 
+show_obspace = True
+
 env = MilSim.MilVehicleSimEnv()
 
 #env.observation_space.sample()
@@ -28,16 +30,16 @@ for episode in range(episodes):
         state, reward, done, info = env.step(action)
 
 
-        # This is for Testing the Observation Space
-
-        with open('observation_space.csv', 'w') as f:
-            write = csv.writer(f)
-            write.writerows(state)
+        # Print the observation space
+        if show_obspace:
+            with open('observation_space/observation_space.csv', 'w') as f:
+                write = csv.writer(f, delimiter=';')
+                write.writerows(state)
 
 
 
         score += reward
-        time.sleep(0.06)  # slowing down the rendering
+        time.sleep(0.01)  # slowing down the rendering
         env.render()
 
         # print the statistics ...

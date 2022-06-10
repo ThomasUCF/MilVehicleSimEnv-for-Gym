@@ -5,6 +5,9 @@
 
 ## Enemy Elements
 * CHECK IEDs
+* IED detection by entity (when close by) PRIO 1
+* multiple IEDs
+* A* Path planning
 * Enemy Tanks
   * Create an area in the scenar. An enemy will be set there randomly each episode.
 * borders/no-go areas
@@ -12,6 +15,7 @@
 ## Entity Constraints
 * limited gas
 * limited health
+* CHECK limited view
 
 ## entity movement
 * CHECK diagonal movement
