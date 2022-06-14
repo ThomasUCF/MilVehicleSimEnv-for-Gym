@@ -16,22 +16,46 @@ import reduce_obspace
 
 class MilVehicleSimEnv(Env):
     def __init__(self):
+        '''
+        The following setting can be set by the user to change the characteristics of the simulation
+        '''
+
+        # set Map and Scenar File!
+        self.map_file = "maps/Map01_TankSimEnv.csv"
+        self.scenar_file = "scenars/Scenar02_TankSimEnv.csv"
+        print("Yeah!")
+
         # set Path Tracking
-        self.path_tracking = True
+        self.path_tracking = False
+
+        # User settings: set Drone Mode
+        self.drone_mode = True
+        # User settings: set Drone Speed
+        self.speed_drone = 1  # should not be more than 3
+
+        # User setting: IED Mode
+        self.ied_mode = False
+        # User setting: show IEDs to user in rendering
+        self.show_ied = False
+
+        # User setting: Set episode length
+        self.timesteps = 120
+
+        # User setting: set if observation space is reduced
+        self.reduced_obspace = True
+
+
+        '''
+        The following settings and initialization are no user setting
+        '''
+
+        # initialize the timesteps
+        self.episode_length = self.timesteps
+
+        # initialize the path tracking
         if self.path_tracking:
             self.path_track_x = []
             self.path_track_y = []
-
-        # set Drone Mode
-        self.drone_mode = True
-        self.speed_drone = 1
-
-        # Set episode length
-        self.timesteps = 60
-        self.episode_length = self.timesteps
-
-        # set if observation space is reduced
-        self.reduced_obspace = True
 
         # set map size (needs to correlate with csv-file size!)
         self.map_length = 64
@@ -41,15 +65,6 @@ class MilVehicleSimEnv(Env):
         self.speed_sand = 2
         self.speed_forrest = 1
 
-        # set Map and Scenar File!
-        map_file = "maps/Map01_TankSimEnv.csv"
-        self.scenar_file = "scenars/Scenar05_TankSimEnv.csv"
-
-        # set IED Mode
-        self.ied_mode = True
-        # show IEDs to user in rendering
-        self.show_ied = True
-
         # set Boolean for IED activation
         self.ied_attack = False
 
@@ -57,7 +72,7 @@ class MilVehicleSimEnv(Env):
         self.goal_reached = False
 
         # load map file
-        with open(map_file, newline='') as csvfile_map:
+        with open(self.map_file, newline='') as csvfile_map:
             self.list_map = list(csv.reader(csvfile_map, delimiter=';'))
         # convert map list to int
         for y in range(self.map_length):
@@ -93,7 +108,7 @@ class MilVehicleSimEnv(Env):
         self.action_space = Discrete(9)
 
         # Set the Framework List for the Observation Space
-        with open(map_file, newline='') as csvfile_observation_space:
+        with open(self.map_file, newline='') as csvfile_observation_space:
             self.observation_space = list(csv.reader(csvfile_observation_space, delimiter=';'))
             for y in range(self.map_length):
                 for x in range(self.map_length):
@@ -195,6 +210,23 @@ class MilVehicleSimEnv(Env):
         if self.distance_goal <= 2:
             self.goal_reached = True
 
+        # calculate the direction to the goal
+        self.angle_to_goal = math.atan2(self.y_coord - self.y_coord_goal, self.x_coord - self.x_coord_goal)
+        self.angle_to_goal = round(math.degrees(self.angle_to_goal), 0)
+        #print(self.angle_to_goal)
+
+        # describe the angle in N E S or W
+        if self.angle_to_goal >= -135 and self.angle_to_goal <= -45:
+            self.goal_direction = 1
+        elif self.angle_to_goal > -45 and self.angle_to_goal < 45:
+            self.goal_direction = 2
+        elif self.angle_to_goal >= 45 and self.angle_to_goal <= 135:
+            self.goal_direction = 3
+        elif self.angle_to_goal > 135 and self.angle_to_goal <= 180 or self.angle_to_goal < -135 and self.angle_to_goal >=-180:
+            self.goal_direction = 4
+        else:
+            self.goal_direction = 0
+
         # setting the reward here
         if self.distance_goal > 1:
             reward = -1
@@ -251,6 +283,20 @@ class MilVehicleSimEnv(Env):
         # reduce observation space if needed
         if self.reduced_obspace:
             self.reduced_obspace_list = reduce_obspace.reduce_obspace(self.observation_space, self.map_length)
+            #print(self.reduced_obspace_list)
+
+            # append the distance and the direction to the goal to the observation space
+            self.obspace_line_dist_goal = []
+            for i in range(len(self.reduced_obspace_list[0])):
+                if i == 0:
+                    self.obspace_line_dist_goal.append(int(round(self.distance_goal / 10, 0)))
+                elif i == 1:
+                    self.obspace_line_dist_goal.append(int(self.goal_direction))
+                    #self.obspace_line_dist_goal.append(int(self.angle_to_goal))
+                else:
+                    self.obspace_line_dist_goal.append(0)
+            self.reduced_obspace_list.append(self.obspace_line_dist_goal)
+
             #print(self.reduced_obspace_list)
 
 

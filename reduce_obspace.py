@@ -6,8 +6,8 @@ Institute: Institute for Simulation and Training
 
 map_length = 64
 
-#reduced_obspace_size = 25  # 5 x 5
-reduced_obspace_size = 49  # 7 x 7
+reduced_obspace_size = 25  # 5 x 5
+#reduced_obspace_size = 49  # 7 x 7
 
 def reduce_obspace(obspace, map_length):
     #entity_x_coord = 0

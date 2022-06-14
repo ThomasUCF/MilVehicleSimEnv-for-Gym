@@ -86,6 +86,8 @@ The observation space includes:
 * the entity (tank/drone)
 * the goal
 * NOT the IED
+* Direction from the goal (in reduced observation space only)
+* Distance to the goal (in reduced observation space only)
 
 ### Full Observation Space
 Size: 64 x 64
@@ -109,6 +111,15 @@ The size of the reduced observation space can be set in the `reduce_obspace.py`:
 	#reduced_obspace_size = 25  # 5 x 5
 	reduced_obspace_size = 49  # 7 x 7
 
+The reduced observation space includes the direction of the entity from the goal and distance of the entity to the goal.
+
+* Direction from the goal:
+	* 1 = North
+	* 2 = East
+	* 3 = South
+	* 4 = West
+* Distance to the goal:
+	* Integer value from 0 to 6 (close to far)
 
 ### Observation Space Viewer
 The `obspace_show.py` can be run in a separate terminal. This script grabs the observation space from the observation_space folder. It is needed to activate show_obspace in the `main.py` to use this:

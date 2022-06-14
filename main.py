@@ -39,7 +39,7 @@ for episode in range(episodes):
 
 
         score += reward
-        time.sleep(0.01)  # slowing down the rendering
+        time.sleep(0.08)  # slowing down the rendering
         env.render()
 
         # print the statistics ...
