@@ -84,13 +84,14 @@ The observation space includes:
 
 * the terrain
 * the entity (tank/drone)
-* the goal
+* the goal (disabled at the moment)
 * NOT the IED
 * Direction from the goal (in reduced observation space only)
 * Distance to the goal (in reduced observation space only)
 
 ### Full Observation Space
 Size: 64 x 64
+Note: Full observation is not quite functional at the moment. The goal is disable due to focus on the reduced observation space.
 
 ### Reduced Observation Space
 A reduced observation space can be activated. This simulated a limited view of the entity.
@@ -108,6 +109,7 @@ The following observation spaces are possible:
 
 The size of the reduced observation space can be set in the `reduce_obspace.py`:
 
+	#reduced_obspace_size = 9  # 3 x 3
 	#reduced_obspace_size = 25  # 5 x 5
 	reduced_obspace_size = 49  # 7 x 7
 
@@ -132,10 +134,12 @@ The reduced observation space needs to be set in the `obspace_show.py` according
 
 	# set the reduced observation space
 	reduced_obspace = True
+	
+	#reduced_obspace_size = 9  # 3 x 3
 	#reduced_obspace_size = 25  # 5 x 5
 	reduced_obspace_size = 49  # 7 x 7
 
-<img src="img/Main_Win_for_Reduced_Obspace.png" alt="drawing" width="400"/>
+<img src="img/Main_Win_for_Reduced_Obspace.png" alt="drawing" width="600"/><br>
 <img src="img/Obspace_Viewer.png" alt="drawing" width="300"/><br>
 Reduced observation space of 7 x 7 in the observation space viewer
 

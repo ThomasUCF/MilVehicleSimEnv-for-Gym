@@ -16,23 +16,26 @@ map_file = 'observation_space/observation_space.csv'
 
 # set the reduced observation space
 reduced_obspace = True
-reduced_obspace_size = 25  # 5 x 5
-#reduced_obspace_size = 49  # 7 x 7
+#reduced_obspace_size = 9  # 3 x 3
+#reduced_obspace_size = 25  # 5 x 5
+reduced_obspace_size = 49  # 7 x 7
 
 
 finished = False
 
 if reduced_obspace:
-    if reduced_obspace_size == 25:
+    if reduced_obspace_size == 9:
+        obspace_length = 3
+    elif reduced_obspace_size == 25:
         obspace_length = 5
-    if reduced_obspace_size == 49:
+    elif reduced_obspace_size == 49:
         obspace_length = 7
 else:
     obspace_length = 64
 
 while not finished:
 
-    time.sleep(0.1)
+    time.sleep(0.2)
 
     # load observation space file
     with open(map_file, newline='') as csvfile_obspace:
@@ -46,8 +49,31 @@ while not finished:
     # clear screen for rendering new frame of the map
     os.system('clear')
 
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "----------------", end="\n" + Back.BLACK)
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "| Machine View |", end="\n" + Back.BLACK)
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "----------------", end="\n" + Back.BLACK)
+    for l in range(obspace_length + 1):
+        print(Back.BLACK + Fore.YELLOW, list_obspace[l], end="\n" + Back.BLACK)
+    print()
+
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "----------------", end="\n" + Back.BLACK)
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "|  Human View  |", end="\n" + Back.BLACK)
+    print(Back.BLACK + Fore.LIGHTYELLOW_EX, "----------------", end="\n" + Back.BLACK)
     # render the observation space in terminal
-    print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", list_obspace[obspace_length][0], end="\n" + Back.BLACK)
+    if list_obspace[obspace_length][0] == 0:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|      |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 1:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|=     |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 2:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|==    |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 3:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|===   |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 4:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|====  |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 5:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|===== |", end="\n" + Back.BLACK)
+    elif list_obspace[obspace_length][0] == 6:
+        print(Back.BLACK + Fore.YELLOW, "Distance to Goal: ", "|======|", end="\n" + Back.BLACK)
     #print(Back.BLACK + Fore.YELLOW, "Angle to Goal: ", list_obspace[obspace_length][1], end="\n" + Back.BLACK)
     if list_obspace[obspace_length][1] == 1:
         print(Back.BLACK + Fore.YELLOW, "Direction to Goal: ", "North", end="\n" + Back.BLACK)

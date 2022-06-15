@@ -22,14 +22,13 @@ class MilVehicleSimEnv(Env):
 
         # set Map and Scenar File!
         self.map_file = "maps/Map01_TankSimEnv.csv"
-        self.scenar_file = "scenars/Scenar02_TankSimEnv.csv"
-        print("Yeah!")
+        self.scenar_file = "scenars/Scenar01_TankSimEnv.csv"
 
         # set Path Tracking
         self.path_tracking = False
 
         # User settings: set Drone Mode
-        self.drone_mode = True
+        self.drone_mode = False
         # User settings: set Drone Speed
         self.speed_drone = 1  # should not be more than 3
 
@@ -160,7 +159,7 @@ class MilVehicleSimEnv(Env):
 
         # move EAST
         elif action == 3:
-            if self.x_coord < self.map_length + self.distance_move:
+            if self.x_coord < self.map_length - self.distance_move:
                 # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord][self.x_coord + self.distance_move] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0
@@ -174,7 +173,7 @@ class MilVehicleSimEnv(Env):
 
         # move SOUTH
         elif action == 5:
-            if self.y_coord < self.map_length + self.distance_move:
+            if self.y_coord < self.map_length - self.distance_move:
                 # this is the actual move; it writes the new coordinate in the scenar list
                 self.list_scenar[self.y_coord + self.distance_move][self.x_coord] = self.list_scenar[self.y_coord][self.x_coord]
                 self.list_scenar[self.y_coord][self.x_coord] = 0

@@ -23,10 +23,19 @@ for episode in range(episodes):
     done = False
     score = 0
 
+    counter = 0
+
     while not done:
         #env.render()
         action = env.action_space.sample()
-        #action = 6
+
+        '''
+        if counter < 12:
+            action = 3
+        else: action = 9
+        counter += 1
+        '''
+
         state, reward, done, info = env.step(action)
 
 

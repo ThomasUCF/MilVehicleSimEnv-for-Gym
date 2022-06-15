@@ -15,7 +15,7 @@ from PIL import Image
 # set image file
 map_file = 'maps/Map01_TankSimEnv.csv'
 scenar_file = 'scenars/Scenar01_TankSimEnv.csv'
-path_file = 'path_tracking/Path_1654107091.868553.csv'
+path_file = 'path_tracking/Path_1654526306.731136.csv'
 
 # set the color codes
 colorcode_forrest = np.array([191, 242, 128])
