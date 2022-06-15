@@ -1,5 +1,5 @@
 '''
-Author: Thomas Schiller
+Author: Thomas Schiller, M&S Student
 University: University of Central Florida
 Institute: Institute for Simulation and Training
 '''

@@ -1,5 +1,5 @@
 # MilVehicleSimEnv for Gym
-**Author:** Thomas Schiller<br>
+**Author:** Thomas Schiller, Student of Modeling & Simulation<br>
 **University:** University of Central Florida (UCF)<br>
 **Institute:** Institute for Simulation and Training<br>
 
