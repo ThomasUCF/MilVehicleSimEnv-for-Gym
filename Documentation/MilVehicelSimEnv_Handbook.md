@@ -145,7 +145,7 @@ Reduced observation space of 7 x 7 in the observation space viewer
 
 
 ## Reward
-Worst Possible Reward: -61
+Worst Possible Reward: -121 (timesteps - 1)
 Best Theoretical Reward: 0
 
 The reward is similar to Mountain Car. The higher the value, the better the result.

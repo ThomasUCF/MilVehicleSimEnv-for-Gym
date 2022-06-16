@@ -14,15 +14,16 @@ from PIL import Image
 
 # set image file
 map_file = 'maps/Map01_TankSimEnv.csv'
-scenar_file = 'scenars/Scenar01_TankSimEnv.csv'
-path_file = 'path_tracking/Path_1654526306.731136.csv'
+scenar_file = 'scenars/Scenar03_TankSimEnv.csv'
+path_file = 'path_tracking/Path_1655394119.703778.csv'
 
 # set the color codes
 colorcode_forrest = np.array([191, 242, 128])
 colorcode_sand = np.array([253, 251, 239])
 colorcode_road = np.array([160, 160, 160])
-colorcode_goal = np.array([153, 8, 0])
+colorcode_goal = np.array([241, 15, 249])
 colorcode_tank = np.array([119, 227, 242])
+colorcode_ied = np.array([255, 0, 0])
 
 # load map from csv file
 image_data = np.genfromtxt(map_file, delimiter=';')
@@ -43,7 +44,7 @@ for y in range(64):
 with open(scenar_file, newline='') as csvfile_scenar:
     list_scenar = list(csv.reader(csvfile_scenar, delimiter=';'))
 
-print(list_scenar)
+# print(list_scenar)  # for debugging reasons
 
 # grab the coordinates for the goal (flag) and tank or drone
 for y in range(64):
@@ -56,6 +57,10 @@ for y in range(64):
             rgb_image[y, x] = colorcode_tank
             tank_coord_x = x
             tank_coord_y = y
+        elif list_scenar[y][x] == "80":
+            rgb_image[y, x] = colorcode_ied
+            ied_coord_x = x
+            ied_coord_y = y
         pass
 
 # save the map as png file in the path tracking folder; it will be used to plot the graph

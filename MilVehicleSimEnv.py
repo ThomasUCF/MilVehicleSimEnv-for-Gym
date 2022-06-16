@@ -22,10 +22,10 @@ class MilVehicleSimEnv(Env):
 
         # set Map and Scenar File!
         self.map_file = "maps/Map01_TankSimEnv.csv"
-        self.scenar_file = "scenars/Scenar01_TankSimEnv.csv"
+        self.scenar_file = "scenars/Scenar03_TankSimEnv.csv"
 
         # set Path Tracking
-        self.path_tracking = False
+        self.path_tracking = True
 
         # User settings: set Drone Mode
         self.drone_mode = False
@@ -33,9 +33,9 @@ class MilVehicleSimEnv(Env):
         self.speed_drone = 1  # should not be more than 3
 
         # User setting: IED Mode
-        self.ied_mode = False
+        self.ied_mode = True
         # User setting: show IEDs to user in rendering
-        self.show_ied = False
+        self.show_ied = True
 
         # User setting: Set episode length
         self.timesteps = 120
